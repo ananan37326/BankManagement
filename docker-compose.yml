@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./input_files:/app/input_files
+      - ./output_files:/app/output_files
+    environment:
+      - INPUT_DIR=/app/input_files
+      - OUTPUT_DIR=/app/output_files
+    command: python task.py
+
+  input_generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./input_files:/app/input_files
+      - ./output_files:/app/output_files
+    environment:
+      - INPUT_DIR=/app/input_files
+      - OUTPUT_DIR=/app/output_files
+    command: python input_generator.py
